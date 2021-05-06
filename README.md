@@ -1,4 +1,4 @@
-# PSY6422 Data Management and Visualisation Project
+# PSY6422: Data Management and Visualisation Project
 
 ## Challenging the availability heuristic with data visualisations
 
