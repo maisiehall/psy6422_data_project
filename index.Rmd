@@ -182,9 +182,9 @@ plot + scale_x_discrete(labels=labs) +
 ```
 
 ### Summary and future directions
-This projects aimed to demonstrate how the availability heuristic influences judgments regarding the frequency of shark attacks in Australia. The visualisations show that the most attacks in a 12-month period was in 2018, when 39 attacks occurred (although only a small proportion of the attacks were fatal). However, the USA consistently experiences more shark attacks than Australia.
+This project aimed to demonstrate how the availability heuristic influences judgments regarding the frequency of shark attacks in Australia. The visualisations show that the most attacks in a 12-month period was in 2018, when 39 attacks occurred (although only a small proportion of the attacks were fatal). However, the USA consistently experiences more shark attacks than Australia.
 
-Although these visualisations enable the reader to get an idea of the number of attacks which take place, no data was available regarding population estimates. This meant that, in order to assess the affect of the availability heuristic on these judgments, I had to rely on asking the reader to make a mental estimate in order for them to assess how accurate their estimation was. To improve this project, data should be collected detailing estimations so that a visualisation can be plotted which provides a direct comparison of how accurate judgments are... If people estimate too high a number, it would suggest that the availability heuristic is at play!
+Although these visualisations enable the reader to get an idea of the number of attacks which take place, no data was available regarding how many attacks people *estimate* to happen. This meant that, in order to assess the affect of the availability heuristic on judgments, I had to rely on asking the reader to make a mental estimate in order for them to assess how accurate their estimation was. To improve this project, data should be collected regarding estimations so that a visualisation can be plotted to provide a direct comparison of how accurate judgments are... If people estimate too high a number, it would suggest that the availability heuristic is at play!
 
 ### References  
 - Illustration adapted from: https://tinyurl.com/763str9d  
