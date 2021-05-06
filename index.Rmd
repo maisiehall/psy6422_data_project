@@ -40,9 +40,9 @@ The availability heuristic was first discussed by [Kahneman and Tversky (1973)](
 
 ### Research Questions  
 - How often do shark attacks happen in Australia? Do they happen more or less often than in other countries?  
-- How does the frequency of shark attacks compare to the reader’s estimate of how often they happen? In other words, are estimations influenced by the availability heuristic?  
+- How does the frequency of shark attacks compare to the reader’s estimate of how often they happen? Are estimations accurate or are they potentially influenced by the availability heuristic?  
 
-Before continuing, please ask yourself… how many shark attacks do you think have happened in Australia over the past 50 years? Note that here, *Australia* refers to any mainland state or territory.
+Before continuing, ask yourself… how many shark attacks do you think have happened in Australia over the past 50 years? Note that here, *Australia* refers to any mainland state or territory.
 
 ### Data
 A data set has been obtained from [Kaggle](https://www.kaggle.com/) which includes 16 different variables related to shark attacks around the world, and this data set can be accessed [here](https://www.kaggle.com/ncsaayali/shark-attack-dataset). The first 5 rows of the data are shown below:
