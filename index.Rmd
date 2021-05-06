@@ -1,0 +1,196 @@
+---
+title: <span style="font-size:80%">Challenging the Availability Heuristic with Visualistions
+author: "Maisie Hall"
+date: <span style="font-size:70%">23/04/2021
+output: 
+  html_document:
+    css: stylesheet.css
+---
+
+<style type="text/css">
+.main-container {
+  max-width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(tidyr)
+library(plotly)
+renv::init
+```
+
+```{r, fig.align='center', out.width="30%", echo=FALSE}
+knitr::include_graphics(here("images", "never_swim_again.jpeg"))
+```
+
+### Project Motivation
+At the time of creating this project (April 2021), 11 of the 20 results which appear on the first page of the BBC News website when searching ‘shark attacks’ mention Australia in the headline or caption. Such information is likely to inform estimations of how often shark attacks occur in Australia. Thus, **the aim of this project is to use data visualisations in order to assess whether the availability heuristic influences estimations of shark attacks in Australia.**  
+
+*What is the availability heuristic?*  
+In cognitive psychology, the availability heuristic refers to a cognitive bias which is frequently used when estimating the likelihood of an event. The easier an example of an event comes to mind, the more common the event is deemed to be.
+
+The availability heuristic was first discussed by [Kahneman and Tversky (1973)](https://www.sciencedirect.com/science/article/abs/pii/0010028573900339), and was chosen to be the main focus of this project for two main reasons:  
+1. Anybody is prone to cognitive biases and everyone is likely to have been influenced by the availability heuristic at some point.  
+2. When people are unlikely to question their own judgments or perceptions, visualisation can be useful at dispelling myths.
+
+### Research Questions  
+- How often do shark attacks happen in Australia? Do they happen more or less often than in other countries?  
+- How does the frequency of shark attacks compare to the reader’s estimate of how often they happen? In other words, are estimations influenced by the availability heuristic?  
+
+Before continuing, please ask yourself… how many shark attacks do you think have happened in Australia over the past 50 years? Note that here, *Australia* refers to any mainland state or territory.
+
+### Data
+A data set has been obtained from [Kaggle](https://www.kaggle.com/) which includes 16 different variables related to shark attacks around the world, and this data set can be accessed [here](https://www.kaggle.com/ncsaayali/shark-attack-dataset). The first 5 rows of the data are shown below:
+
+```{r, create table, include=FALSE}
+#Read in the raw data set
+raw_data <- readxl::read_xls(here("data", "shark_data.xls"))
+
+#Delete variables which aren't needed
+shark_data <- raw_data %>%
+  select(Year, Country, Area, `Fatal (Y/N)`)
+
+#Rename variables to get rid of capital letters (for ease when coding)
+shark_data <- shark_data %>%
+  rename(year = Year, country = Country, area = Area, fatal = `Fatal (Y/N)`)
+```
+
+```{r, echo=FALSE}
+#Display first five rows of data set
+knitr::kable(shark_data[1:5, ],)
+```
+### Visualisation 1: Top three countries over 50 years
+The following code will show the data preparation that was done to make the data suitable for the graph.
+
+```{r, variable prep}
+#See which countries have the most shark attacks
+count(shark_data, country, sort=TRUE)
+
+#Limit data to the top three countries
+shark_data <- shark_data[(shark_data$country=="AUSTRALIA" |
+                            shark_data$country=="USA" |
+                            shark_data$country =="SOUTH AFRICA"), ]
+
+#Specify time span to be plotted
+shark_data <- subset(shark_data, year > "1968" & year < "2020")
+```
+
+```{r, missing data, include=FALSE}
+#Check for missing data in variables relevant to current graph i.e. country, year
+colSums(is.na(shark_data))
+```
+
+```{r, line graph}
+#Data to plot
+country_per_year <- shark_data %>% 
+  group_by(country) %>% count(year)
+
+#Line graph
+line_plot <- ggplot(data = country_per_year,
+  aes(x = as.numeric(year), y = n, group = 1, color = country,
+      text = paste(
+        "Year:", as.numeric(year),
+         "<br>Number of shark attacks:", n,
+           "<br>Country:", country),
+           )
+       ) +
+  geom_line() +
+    scale_color_manual(values = c("navy", "burlywood1", "sienna2")) +
+      theme_light() +
+        ggtitle(
+          "Number of shark attacks between 1969-2019 in the three most affected countries") +
+   xlab("Year") + 
+    ylab("Number of shark attacks") +
+      theme(text=element_text(family="Georgia")) +
+        scale_x_continuous(breaks=seq(1950,2020,10))
+
+#Make plot interactive
+ggplotly(line_plot, tooltip = "text") %>% 
+  layout(legend = list(orientation = "h", x = 0.225, y = -0.2)) 
+```
+
+**If you were surprised by these results, your estimation may have been influenced by the availability heuristic.**
+
+### Visualisation 2: Fatalities
+Now that we have looked at the overall trend of shark attacks in Australia and how it compares to other countries, we can look at how many of the attacks resulted in a fatal accident. To do this, we will focus on the year 2018 (as this was the year that the most attacks happened in Australia) and look at how many attacks in each area resulted in a fatality.
+
+What proportion of shark attacks do you think are deadly?
+
+```{r, data wrangling, warning = FALSE}
+#First, address the NA data
+colSums(is.na(shark_data))
+
+#Reassign the NA values to missing so that we can test for them
+shark_data$area[is.na(shark_data$area)] <- "Missing"
+
+#Check whether there are any missing data in the 'area' column which are related to Australia
+sum(shark_data$country == "AUSTRALIA" & shark_data$area == "Missing")
+
+#Subset Australian data only
+aus <- 
+	shark_data[shark_data$country == "AUSTRALIA", ]
+
+#Keep mainland areas and territories only
+aus_states <- aus[!(aus$area=="Tasmania" | aus$area=="Torres Strait" | aus$area=="Norfolk Island" | aus$area=="Territory of Cocos (Keeling) Islands"),]
+
+#Check that the remaining data is correct
+count(aus_states, area, sort = TRUE)
+#Rename data entries which have a typo (##7)
+aus_states$area[aus_states$area=="Westerm Australia"] <- "Western Australia"
+```
+
+```{r, dealing with missing data, warning=FALSE}
+#Delete excess empty rows of data
+aus_states <- aus_states[-c(1300:20608), ] 
+#Check how many NA's remain
+colSums(is.na(aus_states))
+#Change all NA's in 'fatal' variable to 'unknown' so that they can be grouped and plotted
+aus_states$fatal[is.na(aus_states$fatal)] <- "Unknown"
+
+#Re-code data entries in 'fatal' variable so that they show up as desired in the legend
+aus_states$fatal[aus_states$fatal == "UNKNOWN"] <- "Unknown"
+aus_states$fatal[aus_states$fatal == "Y"] <- "Yes"
+aus_states$fatal[aus_states$fatal == "N"] <- "No"
+```
+
+```{r, histogram, warning=FALSE}
+#Reorder x-axis categories so that 'unknown' is at the end. Then, plot the graph
+plot <- aus_states %>%
+  mutate(area = fct_relevel(area,
+                            "New South Wales", "Northern Territory", "Queensland", "South Australia", "Victoria", "Western Australia", "Area unknown")) %>% 
+  ggplot(aes(x = area, y = ..count.., fill = fatal)) +
+    geom_bar(position = position_dodge(width = 0.5)) +
+      xlab("Year") +
+       ylab("Number of shark attacks") +
+         ggtitle("Number of fatal shark attacks throughout Australia in 2018") +
+           scale_fill_manual(name = "Fatal", 
+                             values = c("lightseagreen", "pink", "brown2")) +
+    scale_y_continuous(breaks=seq(0,200,20)) +
+     theme_light()
+
+#Create x-axis labels with line breaks and to match order of histogram bars
+labs = c("New South\n Wales", "Northern\nTerritory", "Queensland", "South\nAustralia", "Victoria", "Western\nAustralia", "Area\nunknown")
+
+#More plot aesthetics
+plot + scale_x_discrete(labels=labs) +
+  theme(text = element_text(family="Georgia")) +
+  guides(fill = guide_legend(reverse=TRUE))
+```
+
+### Summary and future directions
+This projects aimed to demonstrate how the availability heuristic influences judgments regarding the frequency of shark attacks in Australia. The visualisations show that the most attacks in a 12-month period was in 2018, when 39 attacks occurred (although only a small proportion of the attacks were fatal). However, the USA consistently experiences more shark attacks than Australia.
+
+Although these visualisations enable the reader to get an idea of the number of attacks which take place, no data was available regarding population estimates. This meant that, in order to assess the affect of the availability heuristic on these judgments, I had to rely on asking the reader to make a mental estimate in order for them to assess how accurate their estimation was. To improve this project, data should be collected detailing estimations so that a visualisation can be plotted which provides a direct comparison of how accurate judgments are... If people estimate too high a number, it would suggest that the availability heuristic is at play!
+
+### References  
+- Illustration adapted from: https://tinyurl.com/763str9d  
+- Tversky, A., & Kahneman, D. (1973). Availability: A heuristic for judging frequency and probability. *Cognitive psychology, 5*(2), 207-232. https://doi.org/10.1016/0010-0285(73)90033-9
+
+```{r, renv dependency manager, include = FALSE}
+renv::snapshot()
+```
