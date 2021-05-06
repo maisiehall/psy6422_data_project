@@ -36,7 +36,7 @@ In cognitive psychology, the availability heuristic refers to a cognitive bias w
 
 The availability heuristic was first discussed by [Kahneman and Tversky (1973)](https://www.sciencedirect.com/science/article/abs/pii/0010028573900339), and was chosen to be the main focus of this project for two main reasons:  
 1. Anybody is prone to cognitive biases and everyone is likely to have been influenced by the availability heuristic at some point.  
-2. When people are unlikely to question their own judgments or perceptions, visualisation can be useful at dispelling myths.
+2. Visualisations can be useful for challenging judgments and perceptions when people are otherwise unlikely to question themselves.
 
 ### Research Questions  
 - How often do shark attacks happen in Australia? Do they happen more or less often than in other countries?  
