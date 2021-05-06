@@ -1,5 +1,4 @@
 # PSY6422 Data Management and Visualisation Project
-May 2021
   
 'Challenging the availability heuristic with data visualisations'
 Repository for my data project, completed as part of my MSc in Psychological Research Methods with Data Science at the University of Sheffield.
