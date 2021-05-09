@@ -44,7 +44,7 @@ The availability heuristic was first discussed by [Kahneman and Tversky (1973)](
 Before continuing, ask yourself… how many shark attacks do you think have happened in Australia over the past 50 years? Note that here, *Australia* refers to any mainland state or territory.
 
 ### Data
-A data set has been obtained from [Kaggle](https://www.kaggle.com/) which includes 16 different variables related to shark attacks around the world, and this data set can be accessed [here](https://www.kaggle.com/ncsaayali/shark-attack-dataset). The first 5 rows of the data are shown below:
+A data set has been obtained from [Kaggle](https://www.kaggle.com/) which includes 16 different variables related to shark attacks around the world, and this data set can be accessed [here](https://www.kaggle.com/ncsaayali/shark-attack-dataset). The first 5 rows of the data, with the 4 variables relevant to this project, are shown below:
 
 ```{r, create table, include=FALSE}
 #Read in the raw data set
