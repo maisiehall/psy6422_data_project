@@ -64,7 +64,7 @@ shark_data <- shark_data %>%
 knitr::kable(shark_data[1:5, ],)
 ```
 ### Visualisation 1 (interactive): Top three countries over 50 years
-The following code will show the data preparation that was done to make the data suitable for the graph.
+The following code will demonstrate the data wrangling that was performed in order to prepare the data for visualisation 1.
 
 ```{r, variable prep}
 #See which countries have the most shark attacks
