@@ -118,7 +118,7 @@ ggplotly(line_plot, tooltip = "text") %>%
 ### Visualisation 2: Fatalities
 Now that we have looked at the overall trend of shark attacks in Australia and how it compares to other countries, we can look at how many of the attacks resulted in a fatal accident. To do this, we will focus on the year 2018 (as this was the year that the most attacks happened in Australia) and look at how many attacks in each area resulted in a fatality.
 
-What proportion of shark attacks do you think are deadly?
+Out of all the shark attacks that happened in Australia in 2018, how many would you estimate were fatal?
 
 ```{r, data wrangling, warning = FALSE}
 #First, address the NA data
