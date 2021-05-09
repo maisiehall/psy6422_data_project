@@ -1,5 +1,5 @@
 ---
-title: <span style="font-size:80%">Challenging the Availability Heuristic with Visualistions
+title: <span style="font-size:80%">Challenging the Availability Heuristic with Data Visualistions
 author: "Maisie Hall"
 output: 
   html_document:
@@ -28,7 +28,7 @@ knitr::include_graphics(here("images", "never_swim_again.jpeg"))
 ```
 
 ### Project Motivation
-At the time of creating this project (April 2021), 11 of the 20 results which appear on the first page of the BBC News website when searching ‘shark attacks’ mention Australia in the headline or caption. Such information is likely to inform estimations of how often shark attacks occur in Australia. Thus, **the aim of this project is to use data visualisations to assess whether the availability heuristic influences estimations of how frequently shark attacks occur in Australia.**  
+At the time of creating this project (April 2021), 11 of the 20 results which appear on the first page of the [BBC News](https://www.bbc.co.uk/news) website when searching ‘shark attacks’ mention Australia in the headline or caption. Such information is likely to inform estimations of how often shark attacks occur in Australia. **Thus, the aim of this project is to use data visualisations to assess whether the availability heuristic influences estimations of how frequently shark attacks occur in Australia.**  
 
 *What is the availability heuristic?*  
 In cognitive psychology, the availability heuristic refers to a cognitive bias which is frequently used when estimating the likelihood of an event. The easier an example of an event comes to mind, the more common the event is deemed to be.
