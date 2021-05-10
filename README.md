@@ -3,7 +3,7 @@
 ## Challenging the availability heuristic with data visualisations
 
 Repository for my data project, completed as part of my MSc in Psychological Research Methods with Data Science at the University of Sheffield.
-The project uses a dataset obtained from Kaggle.com, which details shark attacks from around the world over the past 100+ years (this projects uses data from the past 50 years).
+The project uses a dataset obtained from Kaggle.com, which details shark attacks from around the world over the past 100+ years (this projects uses data from a 50 year span of 1969-2019).
 
 The project aims to assess the extent to which estimations of shark attacks are affected by the availability heuristic, by visualising this data for readers to gauge how accurate their perceptions are. Two visualisations are presented; each accompanied by the code which details the necessary data wrangling.
 
