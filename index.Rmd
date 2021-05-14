@@ -39,7 +39,8 @@ The availability heuristic was first discussed by [Kahneman and Tversky (1973)](
 
 ### Research Questions  
 - How often do shark attacks happen in Australia? Do they happen more or less often than in other countries?  
-- How does the frequency of shark attacks compare to the reader’s estimate of how often they happen? Are estimations accurate or are they potentially influenced by the availability heuristic?  
+- What proportion of shark attacks result in death?  
+- How do these results compare to the reader’s estimations? Are estimations accurate or are they potentially influenced by the availability heuristic?  
 
 Before continuing, how many shark attacks do you think have occurred in the last 50 years off the coast of Australia? Note that here, *Australia* refers to any mainland state or territory.
 
