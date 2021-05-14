@@ -122,7 +122,7 @@ Now that we have looked at the overall trend of shark attacks in Australia and h
 Out of all the shark attacks that happened in Australia in 2018, how many would you estimate were fatal?
 
 ```{r, data wrangling, warning = FALSE}
-#First, address the NA data
+#Address the NA data
 colSums(is.na(shark_data))
 
 #Reassign the NA values to missing so that we can test for them
@@ -140,13 +140,14 @@ aus_states <- aus[!(aus$area=="Tasmania" | aus$area=="Torres Strait" | aus$area=
 
 #Check that the remaining data is correct
 count(aus_states, area, sort = TRUE)
-#Rename data entries which have a typo (##7)
+#Rename data entries which have a typo (#7)
 aus_states$area[aus_states$area=="Westerm Australia"] <- "Western Australia"
 ```
 
 ```{r, dealing with missing data, warning=FALSE}
 #Delete excess empty rows of data
 aus_states <- aus_states[-c(1300:20608), ] 
+
 #Check how many NA's remain
 colSums(is.na(aus_states))
 #Change all NA's in 'fatal' variable to 'unknown' so that they can be grouped and plotted
@@ -159,10 +160,11 @@ aus_states$fatal[aus_states$fatal == "N"] <- "No"
 ```
 
 ```{r, histogram, warning=FALSE}
-#Reorder x-axis categories so that 'unknown' is at the end. Then, plot the graph
+#Reorder x-axis categories so that 'unknown' is at the end.
 plot <- aus_states %>%
   mutate(area = fct_relevel(area,
                             "New South Wales", "Northern Territory", "Queensland", "South Australia", "Victoria", "Western Australia", "Area unknown")) %>% 
+  #Plot the data
   ggplot(aes(x = area, y = ..count.., fill = fatal)) +
     geom_bar(position = position_dodge(width = 0.5)) +
       xlab("Year") +
