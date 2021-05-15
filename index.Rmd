@@ -128,10 +128,10 @@ aus <-
 #Assess the NA data
 colSums(is.na(aus))
 
-#Reassign the NA values in 'area' column to Area unknown
+#Reassign the NA values in 'area' column to 'Area unknown'
 aus$area[is.na(aus$area)] <- "Area unknown"
 
-#Keep only the mainland areas and territories, and 'area unknown'
+#Keep only the mainland areas and territories, and 'Area unknown'
 aus_states <- aus[!(aus$area=="Tasmania" | 
                       aus$area=="Torres Strait" | 
                       aus$area=="Norfolk Island" | 
