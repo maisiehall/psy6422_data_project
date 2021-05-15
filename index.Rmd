@@ -121,20 +121,17 @@ Now that we have looked at the overall trend of shark attacks in Australia and h
 Out of all 39 shark attacks that happened in Australia in 2018, how many would you guess were fatal?
 
 ```{r, data wrangling, warning = FALSE}
-#Address the NA data
-colSums(is.na(shark_data))
-
-#Reassign the NA values to missing so that we can test for them
-shark_data$area[is.na(shark_data$area)] <- "Missing"
-
-#Check whether there are any missing data in the 'area' column which are related to Australia
-sum(shark_data$country == "AUSTRALIA" & shark_data$area == "Missing")
-
-#Subset Australian data only
+#Subset Australian data in new variable
 aus <- 
 	shark_data[shark_data$country == "AUSTRALIA", ]
 
-#Keep mainland areas and territories only
+#Assess the NA data
+colSums(is.na(aus))
+
+#Reassign the NA values in 'area' column to Area unknown
+aus$area[is.na(aus$area)] <- "Area unknown"
+
+#Keep only the mainland areas and territories, and 'area unknown'
 aus_states <- aus[!(aus$area=="Tasmania" | 
                       aus$area=="Torres Strait" | 
                       aus$area=="Norfolk Island" | 
@@ -164,7 +161,7 @@ aus_states$fatal[aus_states$fatal == "N"] <- "No"
 ```
 
 ```{r, histogram, warning=FALSE}
-#Reorder x-axis categories so that 'unknown' is at the end.
+#Arrange order of data on the x-axis so that 'area unknown' is at the end
 plot <- aus_states %>%
   mutate(area = fct_relevel(area,
                             "New South Wales", "Northern Territory", "Queensland", "South Australia", "Victoria", "Western Australia", "Area unknown")) %>% 
@@ -176,8 +173,8 @@ plot <- aus_states %>%
          ggtitle("Number of fatal shark attacks throughout Australia in 2018") +
            scale_fill_manual(name = "Fatal", 
                              values = c("lightseagreen", "pink", "brown2")) +
-    scale_y_continuous(breaks=seq(0,200,20)) +
-     theme_light()
+       scale_y_continuous(breaks=seq(0,200,20)) +
+         theme_light()
 
 #Create x-axis labels with line breaks and to match order of histogram bars
 labs = c("New South\n Wales", "Northern\nTerritory", "Queensland", "South\nAustralia", "Victoria", "Western\nAustralia", "Area\nunknown")
