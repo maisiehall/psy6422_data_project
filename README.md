@@ -15,7 +15,7 @@ Files included in this repository are as follows:
 *codebook.rtf* - coodebook detailing variables in the raw data set  
 *stylesheet.css* - CSS style sheet used to add formatting to the R Markdown file  
 *never_swim_again.jpeg* - image used in the R Markdown file  
-*README.md* - the current README file  
+*README.md* - the README file you are currently reading  
 *index.Rmd* - R Markdown file  
 *index.html* - HTML version of my R Markdown page  
-*renv.lock* - dependency manager file which captures packages, R and their versions used in the project
+*renv.lock* - dependency manager file which captures info related to the versions of packages and R used to create this project
