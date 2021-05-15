@@ -10,7 +10,7 @@ The project aims to assess the extent to which estimations of shark attacks are 
 
 This project was coded in R, and a dependency manager (Renv) was used to manage packages.
 
-Files included in this repository are as follows:
+Files included in this repository are as follows:  
 *shark_data.xls* - raw data in Excel format  
 *codebook.rtf* - coodebook detailing variables in the raw data set  
 *stylesheet.css* - CSS style sheet used to add formatting to the R Markdown file  
