@@ -28,10 +28,10 @@ knitr::include_graphics(here("images", "never_swim_again.jpeg"))
 ```
 
 ### Project Motivation
-At the time of creating this project (April 2021), 11 of the 20 results which appear on the first page of the [BBC News](https://www.bbc.co.uk/news) website when searching ‘shark attacks’ mention Australia in the headline or caption. Such information is likely to inform estimations of how often shark attacks occur in Australia. **Thus, the aim of this project is to use data visualisations to assess whether the availability heuristic influences estimations of how frequently shark attacks occur in Australia.**  
+At the time of creating this project (April 2021), 11 of the 20 results which appear on the first page of the [BBC News](https://www.bbc.co.uk/news) website when searching ‘shark attacks’ mention Australia in the headline or caption. Such information is likely to inform estimations of how often and how dangerous shark attacks are in Australia. **The aim of this project is to use data visualisations to assess whether the availability heuristic influences estimations of how frequently shark attacks occur in Australia, and how many of these attacks are fatal.**  
 
 *What is the availability heuristic?*  
-In cognitive psychology, the availability heuristic refers to a cognitive bias (or mental shortcut) which is frequently used when evaluating the likelihood of an event. The easier an example of an event comes to mind, the more common the event is deemed to be.
+In cognitive psychology, the availability heuristic refers to a cognitive bias (or mental shortcut) which is frequently used when evaluating the likelihood of an event. The easier an example of an event comes to mind, the more common the event is deemed to be, meaning that events which are reported in the news are often perceived as being common occurrences!
 
 The availability heuristic was first discussed by [Kahneman and Tversky (1973)](https://www.sciencedirect.com/science/article/abs/pii/0010028573900339), and was chosen to be the main focus of this project for two main reasons:  
 1. Anybody is prone to cognitive biases and everyone is likely to have been influenced by the availability heuristic at some point.  
@@ -116,9 +116,9 @@ ggplotly(line_plot, tooltip = "text") %>%
 **If you were surprised by these results, your estimation may have been influenced by the availability heuristic.**
 
 ### Visualisation 2: Fatalities
-Now that we have looked at the overall trend of shark attacks in Australia and how it compares to other countries, we can look at how many of the attacks resulted in a fatal accident. To do this, we will focus on the year 2018 (as this was the year that the most attacks happened in Australia) and look at how many attacks in each area resulted in a fatality.
+Now that we have looked at the overall trend of shark attacks in Australia and how it compares to other countries, we can look at how many of the attacks resulted in a fatal accident. To do this, we will focus on the year 2018 (as this was the year that the most attacks happened in Australia) and look at how many attacks in each area of Australia resulted in a fatality.
 
-Out of all the shark attacks that happened in Australia in 2018, how many would you estimate were fatal?
+Out of all 39 shark attacks that happened in Australia in 2018, how many would you guess were fatal?
 
 ```{r, data wrangling, warning = FALSE}
 #Address the NA data
@@ -142,7 +142,8 @@ aus_states <- aus[!(aus$area=="Tasmania" |
 
 #Check that the remaining data is correct
 count(aus_states, area, sort = TRUE)
-#Rename data entries which have a typo (#7)
+
+#Rename data entries which have a typo (##7)
 aus_states$area[aus_states$area=="Westerm Australia"] <- "Western Australia"
 ```
 
