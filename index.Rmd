@@ -51,7 +51,7 @@ A data set has been obtained from [Kaggle](https://www.kaggle.com/) which includ
 #Read in the raw data set
 raw_data <- readxl::read_xls(here("data", "shark_data.xls"))
 
-#Delete variables which aren't needed
+#Keep only the variables which are relevant to this project
 shark_data <- raw_data %>%
   select(Year, Country, Area, `Fatal (Y/N)`)
 
@@ -102,12 +102,11 @@ line_plot <- ggplot(data = country_per_year,
   geom_line() +
     scale_color_manual(values = c("navy", "burlywood1", "sienna2")) +
       theme_light() +
-        ggtitle(
-          "Number of shark attacks between 1969-2019 in the three most affected countries") +
-   xlab("Year") + 
-    ylab("Number of shark attacks") +
-      theme(text=element_text(family="Georgia")) +
-        scale_x_continuous(breaks=seq(1950,2020,10))
+        ggtitle("Number of shark attacks between 1969-2019 in the three most affected countries") +
+          xlab("Year") + 
+           ylab("Number of shark attacks") +
+             theme(text=element_text(family="Georgia")) +
+               scale_x_continuous(breaks=seq(1950,2020,10))
 
 #Make plot interactive
 ggplotly(line_plot, tooltip = "text") %>% 
@@ -136,7 +135,10 @@ aus <-
 	shark_data[shark_data$country == "AUSTRALIA", ]
 
 #Keep mainland areas and territories only
-aus_states <- aus[!(aus$area=="Tasmania" | aus$area=="Torres Strait" | aus$area=="Norfolk Island" | aus$area=="Territory of Cocos (Keeling) Islands"),]
+aus_states <- aus[!(aus$area=="Tasmania" | 
+                      aus$area=="Torres Strait" | 
+                      aus$area=="Norfolk Island" | 
+                      aus$area=="Territory of Cocos (Keeling) Islands"),]
 
 #Check that the remaining data is correct
 count(aus_states, area, sort = TRUE)
@@ -150,6 +152,7 @@ aus_states <- aus_states[-c(1300:20608), ]
 
 #Check how many NA's remain
 colSums(is.na(aus_states))
+
 #Change all NA's in 'fatal' variable to 'unknown' so that they can be grouped and plotted
 aus_states$fatal[is.na(aus_states$fatal)] <- "Unknown"
 
@@ -181,13 +184,13 @@ labs = c("New South\n Wales", "Northern\nTerritory", "Queensland", "South\nAustr
 #More plot aesthetics
 plot + scale_x_discrete(labels=labs) +
   theme(text = element_text(family="Georgia")) +
-  guides(fill = guide_legend(reverse=TRUE))
+    guides(fill = guide_legend(reverse=TRUE))
 ```
 
 ### Summary and future directions
-This project aimed to demonstrate how the availability heuristic influences judgments regarding the frequency of shark attacks in Australia. The visualisations show that the most attacks in a 12-month period was in 2018, when 39 attacks occurred, although only a small proportion of the attacks were fatal. However, the USA consistently experienced more shark attacks than Australia during tgis period.
+This project aimed to demonstrate how the availability heuristic influences judgments about the frequency and fatality of shark attacks in Australia. The visualisations show that the most attacks in a 12-month period happened in 2018 when 39 attacks occurred, although only a small proportion of the attacks were fatal. However, the USA consistently experienced more shark attacks than Australia during this period.
 
-Although these visualisations enable the reader to get an idea of the number of attacks which take place, no data was available regarding how many attacks people *estimate* to happen. This meant that, in order to assess the affect of the availability heuristic on judgments, I had to rely on asking the reader to make a mental estimate in order for them to assess how accurate their estimation was. To improve this project, data should be collected regarding estimations so that a visualisation can be plotted to provide a direct comparison of how accurate judgments are... If estimates are too high, it would suggest that the availability heuristic is at play!
+Although these visualisations enable the reader to get an idea of the number of attacks which take place and the amount which are fatal, no data was available regarding people's *estimates*. This meant that, in order to assess the affect of the availability heuristic on judgments, I had to rely on asking the reader to make mental estimates in order for them to assess how accurate their estimations were. To improve this project, data should be collected regarding estimations so that a visualisation can be plotted to provide a direct comparison of how accurate judgments are... If estimates are too high, it would suggest that the availability heuristic might be at play!
 
 ### References  
 - Illustration adapted from: https://tinyurl.com/763str9d  
