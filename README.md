@@ -18,4 +18,4 @@ Files included in this repository are as follows:
 *README.md* - the README file you are currently reading  
 *index.Rmd* - R Markdown file  
 *index.html* - HTML version of my R Markdown page  
-*renv.lock* - dependency manager file which captures info related to the versions of packages and R used to create this project
+*renv.lock* - dependency manager file which captures info related to the versions of the packages and R used to create this project
